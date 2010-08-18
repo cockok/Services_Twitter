@@ -597,6 +597,7 @@ class Services_Twitter
         // check if we have is a search or trends call, in this case the base 
         // uri is different
         if (   $cat == 'search' 
+            || ( $cat == null && (string)$endpoint['name'] == 'search')
             || ( $cat == 'trends'
             && !in_array((string)$endpoint['name'], array('available', 'location')))
         ) {
