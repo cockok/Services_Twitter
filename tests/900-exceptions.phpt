@@ -65,7 +65,7 @@ try {
     Services_Twitter::$uri = 'http://twitter.com';
 } catch (Services_Twitter_Exception $exc) {
     echo $exc . "\n";
-    var_dump($exc->getResponse() instanceof HTTP_Request2_Response);
+    var_dump($exc->getResponse() instanceof HTTP_Request2_Response || $exc->getResponse() instanceof HTTP_OAuth_Consumer_Response);
 }
 
 Services_Twitter::$uri = 'this is a bad url indeed...';
