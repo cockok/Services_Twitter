@@ -408,10 +408,14 @@ http://pear.php.net/packages/Services_Twitter
         <endpoint name="create" method="POST" auth_required="true">
             <formats>xml,json</formats>
             <param name="id" type="id_or_screenname" required="true"/>
+            <param name="user_id" type="id_or_screenname" required="false"/>
+            <param name="screen_name" type="id_or_screenname" required="false"/>
         </endpoint>
         <endpoint name="destroy" method="POST" auth_required="true">
             <formats>xml,json</formats>
             <param name="id" type="id_or_screenname" required="true"/>
+            <param name="user_id" type="id_or_screenname" required="false"/>
+            <param name="screen_name" type="id_or_screenname" required="false"/>
         </endpoint>
         <endpoint name="exists" method="GET" auth_required="true" min_args="1">
             <formats>xml,json</formats>
@@ -420,9 +424,12 @@ http://pear.php.net/packages/Services_Twitter
             <param name="screen_name" type="id_or_screenname" required="false"/>
         </endpoint>
         <endpoint name="blocking" method="GET" auth_required="true">
+            <formats>xml,json</formats>
             <param name="page" type="integer" required="false"/>
         </endpoint>
-        <!-- TODO add blocks/blocking/ids but this is not currently possible -->
+        <endpoint name="blocking_ids" method="GET" auth_required="true" routing="/blocks/blocking/ids">
+            <formats>xml,json</formats>
+        </endpoint>
     </category>
 
     <!-- Report spam methods -->

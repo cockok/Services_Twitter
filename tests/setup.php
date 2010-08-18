@@ -25,19 +25,25 @@
 require_once 'Services/Twitter.php';
 require_once 'HTTP/Request2/Response.php';
 require_once 'HTTP/Request2/Adapter/Mock.php';
+require_once 'HTTP/OAuth/Consumer.php';
 
 $cfgfile = dirname(__FILE__) . '/tests-config.php';
 if (false === @include_once $cfgfile) {
     // default config
     $config = array(
-        'user'      => 'test_user',
-        'pass'      => 'test_password',
-        'friend'    => 'test_friend',
-        'status_id' => 100000,
-        'live_test' => false,
-        'list_name' => 'test-list',
-        'list_slug' => 'test-list',
-        'list_user' => 100000,
+        'user'                  => 'test_user',
+        'pass'                  => 'test_password',
+        'friend'                => 'test_friend',
+        'status_id'             => 100000,
+        'live_test'             => false,
+        'list_name'             => 'test-list',
+        'list_slug'             => 'test-list',
+        'list_user'             => 100000,
+        'oauth_test'            => true,
+        'consumer_key'          => 'xxxx',
+        'consumer_secret'       => 'xxxx',
+        'access_token'          => 'xxxx',
+        'access_token_secret'   => 'xxxx',
     );
 }
 
@@ -56,7 +62,16 @@ function Services_Twitter_factory($ep, $auth = true, $options = array())
     //$options['raw_format'] = true;
     global $config;
     if ($auth) {
-        $twitter = new Services_Twitter($config['user'], $config['pass'], $options);
+        if ($config['oauth_test']) {
+            $twitter = new Services_Twitter(null, null, $options);
+            $oauth   = new HTTP_OAuth_Consumer($config['consumer_key'],
+                                               $config['consumer_secret'],
+                                               $config['access_token'],
+                                               $config['access_token_secret']);
+            $twitter->setOAuth($oauth);
+        } else {
+            $twitter = new Services_Twitter($config['user'], $config['pass'], $options);
+        }
     } else {
         $twitter = new Services_Twitter(null, null, $options);
     }

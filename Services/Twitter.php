@@ -376,7 +376,7 @@ class Services_Twitter
             $this->oauth->accept($consumerRequest);
 
             $response = $this->oauth->sendRequest($uri, $params, $method);
-        } catch (HTTP_Request2_Exception $exc) {
+        } catch (HTTP_OAuth_Exception $exc) {
             throw new Services_Twitter_Exception(
                 $exc->getMessage(),
                 $exc, // the original exception cause
