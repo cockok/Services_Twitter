@@ -12,10 +12,11 @@ $twitter  = Services_Twitter_factory('utf8', true, array(
 $utf8str = 'une chaîne unicode qui sera transformée lors du second test';
 echo $twitter->statuses->update($utf8str) . "\n";
 
-$twitter  = Services_Twitter_factory('utf8', true, array(
+$twitter  = Services_Twitter_factory('utf8-2', true, array(
     'format'     => 'xml',
     'raw_format' => true
 ));
+$utf8str = 'une chaîne unicode qui sera transformée lors du second test.';
 $isoStr = utf8_decode($utf8str);
 echo $twitter->statuses->update($isoStr);
 
@@ -31,6 +32,6 @@ echo $twitter->statuses->update($isoStr);
 <?xml version="1.0" encoding="UTF-8"?>
 <status>
   %s
-  <text>une cha&#238;ne unicode qui sera transform&#233;e lors du second test</text>
+  <text>une cha&#238;ne unicode qui sera transform&#233;e lors du second test.</text>
   %s
 </status>

@@ -1,5 +1,14 @@
 --TEST--
 options
+--SKIPIF--
+<?php
+
+require_once dirname(__FILE__) . '/setup.php';
+if ($config['oauth_test']) {
+    echo "skip";
+}
+
+?>
 --FILE--
 <?php
 
