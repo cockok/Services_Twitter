@@ -682,15 +682,15 @@ class Services_Twitter
                 $routing[array_search(':' . $pName, $routing)] = rawurlencode($arg);
             } else {
                 if ($pName == 'id') {
-                     if (count($routing) > 1) {
-                         $params[$pName] = $arg;
-                         if ($method == 'DELETE') {
-                             $method = "POST";
-                             $params['_method'] = 'DELETE';
-                         }
-                     } else {
-                         $path .= '/' . $arg;
-                     }
+                    if (count($routing) > 1) {
+                        $params[$pName] = $arg;
+                        if ($method == 'DELETE') {
+                            $method = "POST";
+                            $params['_method'] = 'DELETE';
+                        }
+                    } else {
+                        $path .= '/' . $arg;
+                    }
                 } else {
                     if ($pType == 'string' && !$this->isUtf8($arg)) {
                         // iso-8859-1 string that we must convert to unicode
